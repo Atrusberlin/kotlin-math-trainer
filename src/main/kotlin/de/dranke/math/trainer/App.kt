@@ -3,6 +3,8 @@
  */
 package de.dranke.math.trainer
 
+import de.dranke.math.trainer.tasks.AdditionTaskFactory
+
 class App {
     val greeting: String
         get() {
@@ -11,5 +13,24 @@ class App {
 }
 
 fun main(args: Array<String>) {
-    println(App().greeting)
+    val additionFactory = AdditionTaskFactory()
+    val taskCount: Int = when (args.count()) {
+        1 -> (args[0].toIntOrNull().let {
+            when (it) {
+                null -> {
+                    println("Value '${args[0]}' is not an Int."); 0
+                }
+                else -> it
+            }
+        })
+        else -> {
+            println("Amount of tasks is missing"); 0
+        }
+    }
+
+    println("Taskcount: $taskCount")
+
+    for (taskNumber in 1..taskCount) {
+        println(additionFactory.createTask())
+    }
 }

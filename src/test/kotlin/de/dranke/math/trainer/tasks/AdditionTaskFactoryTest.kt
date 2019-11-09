@@ -15,7 +15,6 @@ internal class AdditionTaskFactoryTest {
 
     @Test
     fun the_task_operation_is_plus() {
-
         assertEquals('+', task.operation, "Operation has to be '+'")
     }
 

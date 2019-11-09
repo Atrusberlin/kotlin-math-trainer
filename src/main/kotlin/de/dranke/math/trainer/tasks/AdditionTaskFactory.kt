@@ -10,7 +10,11 @@ class AdditionTaskFactory {
     class Task(val addend1: Int, val addend2: Int, val operation: Char) {
 
         init {
-            println("New Task: $addend1 $operation $addend2 = ?")
+//            println(toString())
+        }
+
+        override fun toString(): String {
+            return "New Task: $addend1 $operation $addend2 = ?"
         }
 
     }
