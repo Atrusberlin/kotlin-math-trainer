@@ -4,6 +4,7 @@
 package de.dranke.math.trainer
 
 import de.dranke.math.trainer.tasks.AdditionTaskFactory
+import de.dranke.math.trainer.tasks.NumberGenerator
 
 class App {
     val greeting: String
@@ -13,7 +14,7 @@ class App {
 }
 
 fun main(args: Array<String>) {
-    val additionFactory = AdditionTaskFactory()
+    val additionFactory = AdditionTaskFactory(NumberGenerator(), 0, 10)
     val taskCount: Int = when (args.count()) {
         1 -> (args[0].toIntOrNull().let {
             when (it) {
