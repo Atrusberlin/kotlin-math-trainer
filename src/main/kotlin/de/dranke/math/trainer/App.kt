@@ -14,7 +14,7 @@ class App {
 }
 
 fun main(args: Array<String>) {
-    val additionFactory = AdditionTaskFactory(NumberGenerator(), 0, 10)
+    val additionFactory = AdditionTaskFactory(NumberGenerator(), 50, 250)
     val taskCount: Int = when (args.count()) {
         1 -> (args[0].toIntOrNull().let {
             when (it) {

@@ -7,7 +7,7 @@ import kotlin.test.assertEquals
 internal class AdditionTaskFactoryTest {
 
     private var generator: NumberGeneratorStub
-    private val taskFactory: AdditionTaskFactory
+    private var taskFactory: AdditionTaskFactory
 
     class NumberGeneratorStub : NumberGenerator() {
         var current: Int = 0
@@ -61,6 +61,28 @@ internal class AdditionTaskFactoryTest {
 
         assertEquals(0, generator.lastLowerBoundary, "The lower boundary has to be 0")
         assertEquals(7, generator.lastUpperBoundary, "The upperBoundary has to be 7")
+    }
+
+    @Test
+    fun upperBoundary_for_second_addent_is_greater_than_lowerBoundary() {
+        taskFactory = AdditionTaskFactory(generator, 5, 10)
+        generator.current = 6
+        taskFactory.createTask()
+
+        assertEquals(0, generator.lastLowerBoundary, "Lower boundary has to be '0'")
+        assertEquals(4, generator.lastUpperBoundary, "Upper boundary has to be '4'")
+
+    }
+
+    @Test
+    fun upperBoundary_is_zero_if_addendOne_is_upperBoundary() {
+        taskFactory = AdditionTaskFactory(generator, 5, 10)
+        generator.current = 10
+        taskFactory.createTask()
+
+        assertEquals(0, generator.lastLowerBoundary, "Lower boundary has to be '0'")
+        assertEquals(0, generator.lastUpperBoundary, "Upper boundary has to be '0'")
+
     }
 
 }

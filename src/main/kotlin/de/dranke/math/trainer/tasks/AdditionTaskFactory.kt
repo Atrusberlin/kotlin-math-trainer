@@ -15,8 +15,25 @@ class AdditionTaskFactory() {
 
     fun createTask(): Task {
         val addend1 = numberGenerator.next(lowerBoundary, upperBoundary)
-        val addend2 = numberGenerator.next(lowerBoundary, upperBoundary - addend1)
+        val lowerBoundaryNew = calculateLowerBoundaryForSecondAddend(addend1)
+        val addend2 = numberGenerator.next(lowerBoundaryNew, calculateUperBoundaryForSecondAddend(addend1, lowerBoundaryNew))
         return Task(addend1, addend2, operation);
+    }
+
+    private fun calculateLowerBoundaryForSecondAddend(firstAddend: Int): Int {
+        val newValue = upperBoundary - firstAddend
+        return when {
+            lowerBoundary > newValue -> 0
+            else -> lowerBoundary
+        }
+    }
+
+    private fun calculateUperBoundaryForSecondAddend(firstAddend: Int, lowerBoundaryNew: Int): Int {
+        val newValue = upperBoundary - firstAddend
+        return when {
+            newValue < lowerBoundaryNew -> lowerBoundaryNew
+            else -> newValue
+        }
     }
 
     class Task(val addend1: Int, val addend2: Int, val operation: Char) {
